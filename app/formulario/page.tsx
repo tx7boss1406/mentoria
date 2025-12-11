@@ -292,56 +292,69 @@ const isValidPhone = phoneRegex.test(cleanPhone)
         </Card>
       </div>
 
-      {/* Success Modal - Mobile optimized */}
-      <Dialog open={showSuccess} onOpenChange={setShowSuccess}>
-        <DialogContent className="bg-black border-2 border-lime-500 max-w-sm sm:max-w-md mx-4">
-          <DialogHeader>
-            <DialogTitle className="text-center text-lg sm:text-2xl font-bold text-white mb-4">
-              🎉 Vaga Garantida!
-            </DialogTitle>
-          </DialogHeader>
+      {/* Success Modal - Mobile & Desktop optimized */}
+<Dialog
+  open={showSuccess}
+  onOpenChange={setShowSuccess}
+  className="flex items-center justify-center min-h-screen"
+>
+  <DialogContent className="bg-black border-2 border-lime-500 max-w-sm sm:max-w-md w-full sm:w-auto mx-auto p-6 sm:p-8 rounded-lg">
+    <DialogHeader>
+      <DialogTitle className="text-center text-lg sm:text-2xl font-bold text-white mb-4">
+        🎉 Vaga Garantida!
+      </DialogTitle>
+    </DialogHeader>
 
-          <div className="text-center space-y-4">
-            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-lime-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto">
-              <CheckCircle className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
-            </div>
+    <div className="text-center space-y-4">
+      {/* Icon */}
+      <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-lime-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto">
+        <CheckCircle className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
+      </div>
 
-            <div className="space-y-2">
-              <p className="text-lime-400 font-bold text-base sm:text-lg">Sua vaga foi garantida com sucesso!</p>
-              <p className="text-gray-300 text-sm">
-                Para ativar seu acesso completo, siga o próximo passo agora mesmo:
-              </p>
-            </div>
+      {/* Messages */}
+      <div className="space-y-2">
+        <p className="text-lime-400 font-bold text-base sm:text-lg">
+          Sua vaga foi garantida com sucesso!
+        </p>
+        <p className="text-gray-300 text-sm sm:text-base">
+          Para ativar seu acesso completo, siga o próximo passo agora mesmo:
+        </p>
+      </div>
 
-            <div className="bg-gradient-to-r from-purple-900/50 to-cyan-900/50 p-4 rounded-lg border border-purple-500/30">
-              <p className="text-white font-semibold mb-2 text-sm sm:text-base">Próximos passos:</p>
-              <ul className="text-xs sm:text-sm text-gray-300 space-y-1 text-left">
-                <li>✅ Acesso ao grupo exclusivo de alunos</li>
-                <li>✅ Cronograma completo da mentoria</li>
-                <li>✅ Material antecipado de preparação</li>
-                <li>✅ Participação direta na operação com a equipe</li>
-              </ul>
-            </div>
+      {/* Steps */}
+      <div className="bg-gradient-to-r from-purple-900/50 to-cyan-900/50 p-4 rounded-lg border border-purple-500/30">
+        <p className="text-white font-semibold mb-2 text-sm sm:text-base">
+          Próximos passos:
+        </p>
+        <ul className="text-xs sm:text-sm text-gray-300 space-y-1 text-left">
+          <li>✅ Acesso ao grupo exclusivo de alunos</li>
+          <li>✅ Cronograma completo da mentoria</li>
+          <li>✅ Material antecipado de preparação</li>
+          <li>✅ Participação direta na operação com a equipe</li>
+        </ul>
+      </div>
 
-            <div className="space-y-3">
-              <div className="text-center mb-4">
-                <p className="text-lime-400 font-medium text-sm sm:text-base">
-                  🟢 <span className="font-bold">Clique no botão abaixo</span> para liberar tudo isso agora mesmo.
-                </p>
-              </div>
-              <Button
-                onClick={() => {
-                  setShowSuccess(false)
-                  setShowCheckout(true)
-                }}
-                className="w-full touch-button bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white font-bold py-3 px-4 sm:px-6 rounded-full text-sm sm:text-base"
-              >
-                🔓 LIBERAR ACESSO COMPLETO
-              </Button>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
+      {/* Call to action */}
+      <div className="space-y-3">
+        <div className="text-center mb-4">
+          <p className="text-lime-400 font-medium text-sm sm:text-base">
+            🟢 <span className="font-bold">Clique no botão abaixo</span> para liberar tudo isso agora mesmo.
+          </p>
+        </div>
+        <Button
+          onClick={() => {
+            setShowSuccess(false);
+            setShowCheckout(true);
+          }}
+          className="w-full touch-button bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white font-bold py-3 px-4 sm:px-6 rounded-full text-sm sm:text-base"
+        >
+          🔓 LIBERAR ACESSO COMPLETO
+        </Button>
+      </div>
+    </div>
+  </DialogContent>
+</Dialog>
+
 
       {/* Checkout Block - MOBILE PREMIUM */}
 {showCheckout && (
