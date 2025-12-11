@@ -53,13 +53,14 @@ export default function FormularioPage() {
       // Check if it's an email
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-      // Fixed regex: properly escaped parentheses with $$ and $$ instead of $$
-      // Accepts: 11942498881, (11) 94249-8881, 942498881, (11)942498881, etc.
-      const phoneRegex = /^($$\d{2}$$[\s-]?)?9?\d{8,9}$/
-      const cleanPhone = contact.replace(/[\s\-()]/g, "")
+      // Regex correta para validar telefone brasileiro
+// Aceita: 11942498881, (11) 94249-8881, 942498881, (11)942498881
+const phoneRegex = /^(\d{2})?9?\d{8,9}$/  
+const cleanPhone = contact.replace(/[\s\-()]/g, "")
 
-      const isValidEmail = emailRegex.test(contact)
-      const isValidPhone = phoneRegex.test(cleanPhone) && cleanPhone.length >= 8
+const isValidEmail = emailRegex.test(contact)
+const isValidPhone = phoneRegex.test(cleanPhone)
+
 
       if (!isValidEmail && !isValidPhone) {
         newErrors.contato = "Digite um email válido ou telefone (ex: 11942498881)"
@@ -342,143 +343,167 @@ export default function FormularioPage() {
         </DialogContent>
       </Dialog>
 
-      {/* Checkout Block - Mobile optimized */}
-      {showCheckout && (
-        <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <Card className="bg-black border-2 border-lime-500 max-w-sm sm:max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6 sm:p-8">
-              {/* Header */}
-              <div className="text-center mb-6 sm:mb-8">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-lime-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
-                  <span className="text-2xl sm:text-3xl">🔓</span>
-                </div>
+      {/* Checkout Block - MOBILE PREMIUM */}
+{showCheckout && (
+  <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <Card className="bg-black border-2 border-lime-500 max-w-sm sm:max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-[0_0_25px_rgba(0,255,100,0.25)]">
+      <div className="p-6 sm:p-8">
+        
+        {/* HEADER */}
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="w-20 h-20 bg-gradient-to-r from-lime-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_25px_rgba(0,255,150,0.4)]">
+            <span className="text-4xl">🔓</span>
+          </div>
 
-                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-                  <span className="bg-gradient-to-r from-lime-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                    ACESSO LIBERADO
-                  </span>
-                  <br />
-                  <span className="text-white text-xl sm:text-2xl md:text-3xl">SÓ FALTA UM PASSO!</span>
-                </h1>
-              </div>
+          <h1 className="text-3xl sm:text-4xl font-bold leading-tight">
+            <span className="bg-gradient-to-r from-lime-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
+              ACESSO LIBERADO
+            </span>
+          </h1>
 
-              {/* Price */}
-              <div className="text-center mb-6 sm:mb-8">
-                <div className="bg-gradient-to-r from-lime-900/50 to-cyan-900/50 p-4 sm:p-6 rounded-lg border-2 border-lime-500/50 mb-4 sm:mb-6">
-                  <div className="text-lime-400 text-base sm:text-lg font-semibold mb-2">🎯 Valor do Acesso:</div>
-                  <div className="text-3xl sm:text-5xl font-bold text-white mb-2">R$69,99</div>
-                  <div className="text-gray-300 text-xs sm:text-sm">Pagamento único • Sem mensalidades</div>
-                </div>
-
-                <p className="text-base sm:text-lg text-gray-300 mb-4 sm:mb-6 px-2">
-                  Parabéns por chegar até aqui! Agora você pode garantir sua vaga e desbloquear tudo o que está
-                  esperando por você:
-                </p>
-              </div>
-
-              {/* Benefits - Mobile optimized */}
-              <div className="mb-6 sm:mb-8">
-                <div className="grid grid-cols-1 gap-3 sm:gap-4">
-                  <div className="flex items-start space-x-3 p-3 sm:p-4 bg-black/50 rounded-lg border border-lime-500/30">
-                    <div className="text-lime-400 text-lg sm:text-xl flex-shrink-0">✅</div>
-                    <p className="text-white font-medium text-sm sm:text-base">
-                      Acesso à operação em tempo real com a equipe
-                    </p>
-                  </div>
-
-                  <div className="flex items-start space-x-3 p-3 sm:p-4 bg-black/50 rounded-lg border border-cyan-500/30">
-                    <div className="text-cyan-400 text-lg sm:text-xl flex-shrink-0">✅</div>
-                    <p className="text-white font-medium text-sm sm:text-base">
-                      Entrar no grupo fechado de suporte e acompanhamento
-                    </p>
-                  </div>
-
-                  <div className="flex items-start space-x-3 p-3 sm:p-4 bg-black/50 rounded-lg border border-purple-500/30">
-                    <div className="text-purple-400 text-lg sm:text-xl flex-shrink-0">✅</div>
-                    <p className="text-white font-medium text-sm sm:text-base">
-                      Participação em análises, entradas e tomadas de decisão ao vivo
-                    </p>
-                  </div>
-
-                  <div className="flex items-start space-x-3 p-3 sm:p-4 bg-black/50 rounded-lg border border-orange-500/30">
-                    <div className="text-orange-400 text-lg sm:text-xl flex-shrink-0">✅</div>
-                    <p className="text-white font-medium text-sm sm:text-base">
-                      Suporte direto com quem está no campo de batalha todos os dias
-                    </p>
-                  </div>
-
-                  <div className="flex items-start space-x-3 p-3 sm:p-4 bg-black/50 rounded-lg border border-red-500/30">
-                    <div className="text-red-400 text-lg sm:text-xl flex-shrink-0">✅</div>
-                    <p className="text-white font-medium text-sm sm:text-base">
-                      Atualizações e estratégias exclusivas para membros
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Value Proposition */}
-              <div className="bg-gradient-to-r from-purple-900/50 to-cyan-900/50 p-4 sm:p-6 rounded-lg border border-purple-500/30 mb-6 sm:mb-8">
-                <div className="text-center">
-                  <div className="text-xl sm:text-2xl font-bold text-white mb-2">💡 Tudo isso por apenas R$69,99</div>
-                  <p className="text-gray-300 text-sm sm:text-base">Sem mensalidade, sem taxas escondidas.</p>
-                </div>
-              </div>
-
-              {/* Security Note */}
-              <div className="text-center mb-6 sm:mb-8">
-                <div className="flex items-center justify-center space-x-2 text-gray-300 mb-4">
-                  <span className="text-xl sm:text-2xl">🔒</span>
-                  <span className="font-semibold text-sm sm:text-base">Pagamento 100% seguro via Kirvano</span>
-                </div>
-              </div>
-
-              {/* CTA Buttons */}
-              <div className="space-y-3 sm:space-y-4">
-                <a
-                  href="https://pay.kirvano.com/f61bb896-e3bd-483a-a59a-359c5ba74aad"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button
-                    size="lg"
-                    className="w-full touch-button bg-gradient-to-r from-lime-600 to-cyan-600 hover:from-lime-500 hover:to-cyan-500 text-black font-bold py-4 sm:py-6 px-6 sm:px-8 rounded-full text-base sm:text-xl shadow-2xl hover:shadow-lime-500/25 transition-all duration-300 transform hover:scale-105 border-2 border-lime-400"
-                  >
-                    <span className="text-xl sm:text-2xl mr-2 sm:mr-3">💳</span>
-                    FINALIZAR PAGAMENTO - R$69,99
-                  </Button>
-                </a>
-
-                <Button
-                  onClick={() => setShowCheckout(false)}
-                  variant="outline"
-                  size="lg"
-                  className="w-full touch-button bg-transparent border-2 border-gray-500 text-gray-400 hover:bg-gray-500 hover:text-black font-bold py-3 px-4 sm:px-6 rounded-full transition-all duration-300 text-sm sm:text-base"
-                >
-                  Fechar
-                </Button>
-              </div>
-
-              {/* Trust Indicators */}
-              <div className="mt-6 sm:mt-8 text-center">
-                <div className="grid grid-cols-3 gap-4 text-xs sm:text-sm text-gray-400">
-                  <div className="flex flex-col items-center">
-                    <span className="text-base sm:text-lg mb-1">🛡️</span>
-                    <span>Pagamento Seguro</span>
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <span className="text-base sm:text-lg mb-1">⚡</span>
-                    <span>Acesso Imediato</span>
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <span className="text-base sm:text-lg mb-1">🎯</span>
-                    <span>Suporte Direto</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Card>
+          <p className="text-gray-300 text-lg sm:text-xl mt-2 font-semibold">
+            Só falta confirmar sua vaga
+          </p>
         </div>
-      )}
+
+        {/* URGÊNCIA – 100 PRIMEIROS */}
+        <div className="bg-red-500/10 border border-red-500/40 p-4 rounded-lg text-center mb-6 animate-pulse">
+          <p className="text-red-400 font-bold text-sm sm:text-base">
+            ⚠️ Acesso por R$69,99 disponível SOMENTE para os 100 primeiros novos membros.
+            <br />
+            <span className="text-red-300 font-semibold">
+              Após isso, o valor sobe imediatamente e novas entradas podem ser bloqueadas.
+            </span>
+          </p>
+        </div>
+
+        {/* PRICE BLOCK */}
+        <div className="text-center mb-8">
+          <div className="bg-gradient-to-r from-lime-900/40 to-cyan-900/40 p-6 rounded-lg border-2 border-lime-500/40">
+            <p className="text-lime-400 text-lg font-bold mb-2">🎯 Valor Exclusivo para os 100 Primeiros</p>
+
+            <p className="text-5xl sm:text-6xl font-black text-white drop-shadow-[0_0_8px_rgba(0,255,150,0.5)]">
+              R$69,99
+            </p>
+
+            <p className="text-gray-300 text-xs mt-2">
+              Pagamento único • Sem mensalidades • Acesso imediato
+            </p>
+          </div>
+        </div>
+
+        {/* VALUE PROPOSITION */}
+        <div className="bg-black/40 border border-lime-400/30 p-4 rounded-lg mb-8">
+          <p className="text-gray-300 text-center text-sm leading-relaxed">
+            Você não está comprando um curso.
+            <br />
+            Está entrando em uma <span className="text-lime-400 font-bold">operação real</span>, ativa todos os dias,
+            com profissionais te guiando no que realmente funciona no digital.
+          </p>
+        </div>
+
+        {/* BENEFÍCIOS */}
+        <div className="grid grid-cols-1 gap-3 mb-8">
+
+          <div className="flex items-start space-x-3 p-4 bg-black/50 rounded-lg border border-lime-400/30">
+            <span className="text-lime-400 text-xl">⚡</span>
+            <p className="text-white text-sm sm:text-base font-medium">
+              Operação ao vivo: análises, tarefas e execução em tempo real
+            </p>
+          </div>
+
+          <div className="flex items-start space-x-3 p-4 bg-black/50 rounded-lg border border-cyan-400/30">
+            <span className="text-cyan-400 text-xl">👥</span>
+            <p className="text-white text-sm sm:text-base font-medium">
+              Grupo fechado com acompanhamento direto da equipe
+            </p>
+          </div>
+
+          <div className="flex items-start space-x-3 p-4 bg-black/50 rounded-lg border border-purple-400/30">
+            <span className="text-purple-400 text-xl">🧠</span>
+            <p className="text-white text-sm sm:text-base font-medium">
+              Estratégias validadas para montar e escalar sua estrutura
+            </p>
+          </div>
+
+          <div className="flex items-start space-x-3 p-4 bg-black/50 rounded-lg border border-orange-400/30">
+            <span className="text-orange-400 text-xl">🎨</span>
+            <p className="text-white text-sm sm:text-base font-medium">
+              Criativos, análises, ofertas e ajustes feitos junto com você
+            </p>
+          </div>
+
+          <div className="flex items-start space-x-3 p-4 bg-black/50 rounded-lg border border-red-400/30">
+            <span className="text-red-400 text-xl">🛠️</span>
+            <p className="text-white text-sm sm:text-base font-medium">
+              Suporte direto com quem opera no dia a dia — nada de teoria
+            </p>
+          </div>
+
+        </div>
+
+        {/* PROVA SOCIAL/ESCASSEZ */}
+        <div className="flex items-center justify-center mb-8">
+          <div className="bg-red-500/20 border border-red-500/40 px-4 py-2 rounded-lg">
+            <p className="text-red-400 text-xs sm:text-sm font-semibold">
+              14 pessoas acabaram de entrar...
+            </p>
+          </div>
+        </div>
+
+        {/* SECURITY */}
+        <div className="flex items-center justify-center space-x-2 text-gray-300 text-sm mb-6">
+          <span className="text-xl">🔒</span>
+          <span className="font-semibold">Pagamento 100% seguro via Kirvano</span>
+        </div>
+
+        {/* CTA BUTTON */}
+<a 
+  href="https://pay.kirvano.com/f61bb896-e3bd-483a-a59a-359c5ba74aad" 
+  target="_blank" 
+  rel="noopener noreferrer"
+>
+  <Button
+    size="lg"
+    className="w-full touch-button bg-gradient-to-r from-lime-600 to-red-600 
+    hover:from-lime-500 hover:to-red-500 text-black font-bold 
+    py-4 sm:py-5 px-6 sm:px-8 rounded-full text-xl 
+    shadow-[0_0_20px_rgba(255,0,0,0.35)] hover:shadow-[0_0_28px_rgba(255,0,0,0.45)]
+    transition-all duration-300 transform hover:scale-105 border-2 border-lime-400"
+  >
+    GARANTIR MINHA VAGA
+  </Button>
+</a>
+
+{/* CLOSE BUTTON */}
+<Button
+  onClick={() => setShowCheckout(false)}
+  variant="outline"
+  className="w-full mt-4 bg-transparent border-2 border-gray-500 text-gray-400 
+  hover:bg-gray-500 hover:text-black py-3 rounded-full transition-all duration-300 
+  text-sm sm:text-base"
+>
+  Fechar
+</Button>
+
+
+        {/* TRUST ICONS */}
+        <div className="grid grid-cols-3 gap-4 text-gray-400 text-xs text-center mt-8">
+          <div className="flex flex-col items-center">
+            <span className="text-lg mb-1">🛡️</span> Seguro
+          </div>
+          <div className="flex flex-col items-center">
+            <span className="text-lg mb-1">⚡</span> Imediato
+          </div>
+          <div className="flex flex-col items-center">
+            <span className="text-lg mb-1">🎯</span> Suporte
+          </div>
+        </div>
+
+      </div>
+    </Card>
+  </div>
+)}
     </div>
   )
 }

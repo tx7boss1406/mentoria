@@ -62,39 +62,52 @@ export default function HomePage() {
         </div>
 
         {/* Features Grid - Mobile optimized */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-4xl w-full px-2">
-          <Card className="bg-black/50 border-purple-500/30 p-4 sm:p-6 backdrop-blur-sm hover:border-purple-400/50 transition-all duration-300">
-            <div className="text-center">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                <Play className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
-              </div>
-              <h3 className="text-white font-bold mb-2 text-sm sm:text-base">Jogo Interativo</h3>
-              <p className="text-gray-400 text-xs sm:text-sm">Experiência gamificada única que prende sua atenção</p>
-            </div>
-          </Card>
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-4xl w-full px-2">
+  
+  <Card className="bg-black/50 border-purple-500/30 p-4 sm:p-6 backdrop-blur-sm hover:border-purple-400/50 hover:scale-[1.02] hover:bg-black/60 transition-all duration-300">
+    <div className="text-center">
+      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-lg shadow-purple-500/20">
+        <Play className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+      </div>
+      <h3 className="text-white font-bold mb-2 text-sm sm:text-base">
+        Jogo Interativo Exclusivo
+      </h3>
+      <p className="text-gray-300 text-xs sm:text-sm">
+        Descubra na prática como a gamificação transforma atenção em conversão — em segundos.
+      </p>
+    </div>
+  </Card>
 
-          <Card className="bg-black/50 border-cyan-500/30 p-4 sm:p-6 backdrop-blur-sm hover:border-cyan-400/50 transition-all duration-300">
-            <div className="text-center">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-cyan-500 to-lime-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                <Zap className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
-              </div>
-              <h3 className="text-white font-bold mb-2 text-sm sm:text-base">Estratégias Secretas</h3>
-              <p className="text-gray-400 text-xs sm:text-sm">
-                Aprenda funis que realmente convertem e geram resultado
-              </p>
-            </div>
-          </Card>
+  <Card className="bg-black/50 border-cyan-500/30 p-4 sm:p-6 backdrop-blur-sm hover:border-cyan-400/50 hover:scale-[1.02] hover:bg-black/60 transition-all duration-300">
+    <div className="text-center">
+      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-cyan-500 to-lime-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-lg shadow-cyan-500/20">
+        <Zap className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+      </div>
+      <h3 className="text-white font-bold mb-2 text-sm sm:text-base">
+        Técnicas Avançadas Ocultas
+      </h3>
+      <p className="text-gray-300 text-xs sm:text-sm">
+        Aprenda estratégias que os top players usam para gerar vendas todos os dias — sem depender da sorte.
+      </p>
+    </div>
+  </Card>
 
-          <Card className="bg-black/50 border-lime-500/30 p-4 sm:p-6 backdrop-blur-sm hover:border-lime-400/50 transition-all duration-300 sm:col-span-2 lg:col-span-1">
-            <div className="text-center">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-lime-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                <span className="text-white font-bold text-lg sm:text-xl">💰</span>
-              </div>
-              <h3 className="text-white font-bold mb-2 text-sm sm:text-base">Resultados Reais</h3>
-              <p className="text-gray-400 text-xs sm:text-sm">Veja como é possível lucrar todos os dias</p>
-            </div>
-          </Card>
-        </div>
+  <Card className="bg-black/50 border-lime-500/30 p-4 sm:p-6 backdrop-blur-sm hover:border-lime-400/50 hover:scale-[1.02] hover:bg-black/60 transition-all duration-300 sm:col-span-2 lg:col-span-1">
+    <div className="text-center">
+      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-lime-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-lg shadow-lime-500/20">
+        <span className="text-white font-bold text-lg sm:text-xl">💰</span>
+      </div>
+      <h3 className="text-white font-bold mb-2 text-sm sm:text-base">
+        Resultados Que Escalam
+      </h3>
+      <p className="text-gray-300 text-xs sm:text-sm">
+        Entenda como aplicar as técnicas e transformar tráfego em lucro real — todos os dias.
+      </p>
+    </div>
+  </Card>
+
+</div>
+
 
         {/* Bottom CTA - Mobile optimized */}
         <div className="mt-8 sm:mt-12 text-center w-full max-w-sm px-4">

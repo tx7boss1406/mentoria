@@ -341,73 +341,103 @@ export default function GamePage() {
         </Card>
       </div>
 
-      {/* Game Over Modal - Mobile optimized */}
-      <Dialog open={showGameOverModal} onOpenChange={setShowGameOverModal}>
-        <DialogContent className="bg-black border-2 border-purple-500 max-w-sm sm:max-w-md mx-4">
-          <DialogHeader>
-            <DialogTitle className="text-center text-lg sm:text-2xl font-bold text-white mb-4">
-              👀 Você viu como é fácil chamar atenção com um funil diferente?
-            </DialogTitle>
-          </DialogHeader>
+     {/* Game Over Modal - Mobile optimized */}
+<Dialog open={showGameOverModal} onOpenChange={setShowGameOverModal}>
+  <DialogContent
+    className="
+      bg-black 
+      border-2 border-purple-500 
+      w-[92%] 
+      max-w-[360px]
+      mx-auto
+      rounded-2xl
+      px-4 py-6
+      flex flex-col items-center
+      text-center
+    "
+  >
+    <DialogHeader>
+      <DialogTitle className="text-center text-lg font-extrabold text-white leading-tight">
+        ⚡ Seu cérebro acabou de sentir o poder de um *funil diferente*...
+      </DialogTitle>
+    </DialogHeader>
 
-          <div className="text-center space-y-4">
-            <div className="bg-gradient-to-r from-purple-900/50 to-cyan-900/50 p-4 rounded-lg border border-purple-500/30">
-              <div className="text-lime-400 text-lg sm:text-xl font-bold mb-2">
-                💰 Você acumulou: R${gameState.money.toFixed(2)}
-              </div>
-              <div className="text-cyan-400 text-sm sm:text-base">Obstáculos superados: {gameState.score}</div>
-            </div>
+    {/* SCORE CARD */}
+    <div className="bg-gradient-to-r from-purple-900/50 to-cyan-900/50 p-4 rounded-xl border border-purple-500/30 w-full">
+      <div className="text-lime-400 text-lg font-bold mb-1">
+        💰 Você acumulou: R${gameState.money.toFixed(2)}
+      </div>
+      <div className="text-cyan-400 text-sm">
+        Obstáculos superados: {gameState.score}
+      </div>
+    </div>
 
-            <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
-              Agora imagine fazer isso todo dia e ainda ser pago por isso...
-            </p>
+    {/* TEXTO */}
+    <p className="text-gray-200 text-sm leading-snug mt-3 w-full px-1 text-center">
+  O que você acabou de sentir
+  <br />
+  <span className="text-lime-400 font-bold">
+    não foi só um jogo.
+  </span>
+  <br />
+  Foi uma prova real de como o cérebro reage quando você usa estímulos certos.
+</p>
 
-            <div className="text-lg sm:text-xl font-bold text-white mb-4">🔥 Aprenda isso comigo: TX7BOSS</div>
 
-            <div className="space-y-3">
-              <Link href="/quiz">
-                <Button className="w-full touch-button bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white font-bold py-3 px-4 sm:px-6 rounded-full text-sm sm:text-base">
-                  🚀 Entrar na Mentoria
-                </Button>
-              </Link>
+    {/* CTA */}
+    <div className="text-white text-base font-extrabold mt-4 w-full px-2 leading-snug">
+      🔍 Quer descobrir os bastidores do que acabou de acontecer?
+    </div>
 
-              <Link href="/quiz">
-                <Button
-                  variant="outline"
-                  className="w-full touch-button bg-transparent border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black font-bold py-3 px-4 sm:px-6 rounded-full text-sm sm:text-base"
-                >
-                  📈 Ver Estratégia por Trás
-                </Button>
-              </Link>
+    {/* BUTTONS */}
+    <div className="space-y-3 mt-4 w-full">
 
-              <Button
-                onClick={() => {
-                  setShowGameOverModal(false)
-                  setShowCountdown(true)
-                }}
-                variant="outline"
-                className="w-full touch-button bg-transparent border-2 border-lime-400 text-lime-400 hover:bg-lime-400 hover:text-black font-bold py-3 px-4 sm:px-6 rounded-full text-sm sm:text-base"
-              >
-                <RotateCcw className="mr-2 h-4 w-4" />🔁 Jogar Novamente
-              </Button>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
+      {/* Ver Estratégia */}
+      <Link href="/quiz">
+        <Button
+          className="
+            w-full 
+            bg-gradient-to-r from-purple-600 to-cyan-600 
+            hover:from-purple-500 hover:to-cyan-500
+            text-white font-bold py-3 rounded-full text-sm
+          "
+        >
+          🚀 Ver Estratégia
+        </Button>
+      </Link>
 
-      {/* Countdown Modal */}
-      <Dialog open={showCountdown} onOpenChange={() => {}} modal={true}>
-        <DialogContent className="bg-black border-2 border-lime-500 max-w-sm mx-4" hideCloseButton>
-          <div className="text-center py-8">
-            <div className="text-6xl sm:text-8xl font-bold text-lime-400 mb-4 animate-pulse">
-              {countdown > 0 ? countdown : "GO!"}
-            </div>
-            <p className="text-white text-lg sm:text-xl font-semibold">
-              {countdown > 0 ? `⏳ Prepare-se! O jogo começa em ${countdown}...` : "🚀 Começando!"}
-            </p>
-          </div>
-        </DialogContent>
-      </Dialog>
+      {/* Revelar Bastidores */}
+      <Link href="/quiz">
+        <Button
+          variant="outline"
+          className="
+            w-full 
+            bg-transparent 
+            border-2 border-cyan-400 
+            text-cyan-400 
+            hover:bg-cyan-400 hover:text-black 
+            font-bold py-3 rounded-full text-sm
+          "
+        >
+          📈 Revelar bastidores
+        </Button>
+      </Link>
+
+      {/* Jogar de novo */}
+      <Button
+        onClick={() => {
+          setShowGameOverModal(false)
+          setShowCountdown(true)
+        }}
+        variant="outline" className="w-full touch-button bg-transparent border-2 border-lime-400 text-lime-400 hover:bg-lime-400 hover:text-black font-bold py-3 px-4 sm:px-6 rounded-full text-sm sm:text-base"
+
+      >
+        <RotateCcw className="mr-2 h-4 w-4" /> 🔁 Jogar de novo
+      </Button>
+    </div>
+  </DialogContent>
+</Dialog>
+
     </div>
   )
 }

@@ -1,0 +1,7 @@
+{
+  "/game/page": "app/game/page.js",
+  "/quiz/page": "app/quiz/page.js",
+  "/estrategia-revelada/page": "app/estrategia-revelada/page.js",
+  "/discord/page": "app/discord/page.js",
+  "/formulario/page": "app/formulario/page.js"
+}

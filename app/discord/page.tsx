@@ -30,19 +30,19 @@ const messages: Omit<Message, "id" | "timestamp">[] = [
     user: "@tx7boss",
     role: "DONO",
     color: "text-red-400",
-    content: "Fala, seja bem-vindo à operação. Aqui é desenvolvimento de verdade.",
+    content: "A partir de agora, você opera com a gente. Aqui é execução em alta pressão, e resultado aparece rápido pra quem acompanha o ritmo.",
   },
   {
     user: "Lucas",
     role: "PROGRAMADOR",
     color: "text-purple-400",
-    content: "Hoje vamos montar um funil do zero com vocês.",
+    content: "Vem comigo montar uma oferta do zero usando IA. Depois a gente modela junto até ficar no nível da operação.",
   },
   {
     user: "Pedro",
     role: "DESIGNER",
     color: "text-pink-400",
-    content: "Já tô subindo as primeiras artes, bora revisar junto.",
+    content: "As novas artes estão no ponto. Visual de alta conversão pronto pra rodar hoje.",
   },
   { user: "Carla", role: "CEO", color: "text-lime-400", content: "O objetivo é simples: resultado em tempo real." },
   {
@@ -55,7 +55,7 @@ const messages: Omit<Message, "id" | "timestamp">[] = [
     user: "Marina",
     role: "CRIATIVOS",
     color: "text-orange-400",
-    content: "As copies estão prontas, só validar com o tráfego.",
+    content: "Criativos revisados. Tudo otimizado pra segurar o lead nos primeiros 2 segundos.",
   },
   {
     user: "@tx7boss",

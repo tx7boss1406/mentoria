@@ -14,35 +14,72 @@ interface Question {
 
 const questions: Question[] = [
   {
-    id: 1,
-    question: "Qual dessas situações você mais se identifica?",
-    options: [
-      "Quero começar do zero",
-      "Já tentei, mas não tive resultados",
-      "Tenho um projeto e quero escalar",
-      "Quero montar uma equipe com IA",
+  id: 1,
+  question: "Qual dessas situações descreve melhor o que você sente hoje no digital?",
+  options: [
+    "Sei que posso mais, mas ainda não consigo gerar resultados consistentes",
+    "Já tentei várias coisas e sinto que estou travado no mesmo lugar",
+    "Tenho um projeto bom, mas não sei como escalar de verdade",
+    "Quero começar do zero da forma certa, sem perder tempo",
+  ],
+},
+  {
+  id: 2,
+  question: "Se você tivesse um método claro e validado, quanto tempo conseguiria dedicar por dia?",
+  options: [
+    "Menos de 2h - mas sou disciplinado",
+    "De 2h a 4h - consigo seguir um passo a passo",
+    "5h+ - quero acelerar o processo",
     ],
-  },
+},
   {
-    id: 2,
-    question: "Quantas horas por dia você conseguiria dedicar?",
-    options: ["Menos de 2h", "2h a 4h", "Tempo integral"],
-  },
+  id: 3,
+  question: "Em relação a marketing, copy e estratégias de venda, como você se considera hoje?",
+  options: [
+    "Total iniciante - preciso de direção",
+    "Intermediário - entendo, mas não sei aplicar de forma correta",
+    "Avançado - quero estratégias mais fortes para escalar",
+  ],
+},
   {
-    id: 3,
-    question: "Você já tem experiência com vendas ou marketing digital?",
-    options: ["Não", "Um pouco", "Sim, já atuei"],
-  },
+  id: 4,
+  question: "Na hora de montar ofertas, anúncios e funis… qual é o seu maior desafio hoje?",
+  options: [
+    "Não sei por onde começar",
+    "Tenho ideias, mas não consigo transformar em vendas",
+    "Falta alguém experiente para me guiar no caminho certo",
+    "Consigo fazer, mas não tenho consistência nos resultados",
+  ],
+},
   {
-    id: 4,
-    question: "Você teria interesse em receber ajuda para montar tudo com suporte passo a passo?",
-    options: ["Sim", "Depende", "Não"],
-  },
-  {
-    id: 5,
-    question: "Você prefere um caminho mais rápido com equipe ajudando ou algo 100% sozinho?",
-    options: ["Quero equipe ajudando", "Prefiro aprender sozinho", "Ambos"],
-  },
+  id: 5,
+  question: "Como você prefere aprender algo que realmente funcione?",
+  options: [
+    "Passo a passo com suporte para não errar",
+    "Só preciso da estratégia, o resto eu executo",
+    "Quero aprender e, se possível, delegar para acelerar",
+  ],
+},
+{
+  id: 6,
+  question: "O que mais te segurou até hoje de ter resultados reais?",
+  options: [
+    "Falta de clareza do caminho exato",
+    "Falta de estratégia validada",
+    "Não ter alguém para corrigir meus erros",
+    "Tentar fazer tudo sozinho",
+  ],
+},
+{
+  id: 8,
+  question: "Quão sério você está sobre realmente mudar seu jogo no digital?",
+  options: [
+    "Muito - quero levar isso a sério",
+    "Depende - preciso de um caminho claro",
+    "Pouco - ainda estou entendendo se é para mim",
+  ],
+}
+
 ]
 
 export default function QuizPage() {
@@ -81,69 +118,79 @@ export default function QuizPage() {
     }, 300)
   }
 
-  if (showResult) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900 relative overflow-hidden flex items-center justify-center p-4">
-        {/* Background Effects */}
-        <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 via-black to-cyan-900/20" />
+ if (showResult) {
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900 relative overflow-hidden flex items-center justify-center p-4">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 via-black to-cyan-900/20" />
 
-        <Card className="bg-black/90 border-2 border-lime-500/50 backdrop-blur-sm max-w-2xl w-full">
-          <div className="p-6 sm:p-8 text-center">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-lime-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Target className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
-            </div>
+      <Card className="bg-black/90 border-2 border-lime-500/50 backdrop-blur-sm max-w-2xl w-full">
+        <div className="p-6 sm:p-8 text-center">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-lime-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Target className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
+          </div>
 
-            <h1 className="text-2xl sm:text-3xl font-bold text-white mb-6">
-              🎯 Seu perfil é exatamente o que buscamos!
-            </h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-6">
+            🎯 Seu perfil mostra uma coisa: você não está aqui por acaso.
+          </h1>
 
-            <p className="text-base sm:text-lg text-gray-300 mb-6 leading-relaxed">
-              Você tem o que é necessário para transformar o marketing digital na sua principal fonte de renda, mesmo
-              que esteja começando do zero.
-            </p>
+          <p className="text-base sm:text-lg text-gray-300 mb-6 leading-relaxed">
+            Pelo que você respondeu, dá pra ver que você realmente quer evoluir.  
+            Não é curiosidade, não é “tentativa”.  
+            É decisão — e isso já te coloca na frente de 95% das pessoas que dizem querer viver do digital.
+          </p>
 
-            <div className="bg-gradient-to-r from-purple-900/50 to-cyan-900/50 p-6 rounded-lg border border-purple-500/30 mb-8">
-              <h3 className="text-lg sm:text-xl font-bold text-white mb-4">
-                Com a nossa equipe de especialistas e inteligência artificial, você terá:
-              </h3>
+          <div className="bg-gradient-to-r from-purple-900/50 to-cyan-900/50 p-6 rounded-lg border border-purple-500/30 mb-8">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-4">
+              Aqui está o que você vai ter acesso quando entrar com a gente:
+            </h3>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
-                <div className="flex items-center space-x-2">
-                  <span className="text-lime-400">✅</span>
-                  <span className="text-gray-300 text-sm sm:text-base">Estruturas prontas e personalizadas</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <span className="text-cyan-400">✅</span>
-                  <span className="text-gray-300 text-sm sm:text-base">
-                    Suporte humano direto com quem já vive disso
-                  </span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <span className="text-purple-400">✅</span>
-                  <span className="text-gray-300 text-sm sm:text-base">Mentorias com estratégias testadas</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <span className="text-orange-400">✅</span>
-                  <span className="text-gray-300 text-sm sm:text-base">Material completo para colocar em prática</span>
-                </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
+              <div className="flex items-center space-x-2">
+                <span className="text-lime-400">⚡</span>
+                <span className="text-gray-300 text-sm sm:text-base">
+                  Estratégias validadas no campo de batalha — nada de teoria reciclada
+                </span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="text-cyan-400">⚡</span>
+                <span className="text-gray-300 text-sm sm:text-base">
+                  Suporte real com quem já opera no digital todos os dias
+                </span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="text-purple-400">⚡</span>
+                <span className="text-gray-300 text-sm sm:text-base">
+                  IA aplicada pra te dar velocidade, clareza e operação enxuta
+                </span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="text-orange-400">⚡</span>
+                <span className="text-gray-300 text-sm sm:text-base">
+                  Modelos prontos para você copiar, colar e acelerar o processo
+                </span>
               </div>
             </div>
-
-            <p className="text-lg sm:text-xl font-semibold text-white mb-6">Vamos mostrar a operação ao vivo agora?</p>
-
-            <Link href="/estrategia-revelada">
-              <Button
-                size="lg"
-                className="w-full sm:w-auto touch-button bg-gradient-to-r from-lime-600 to-cyan-600 hover:from-lime-500 hover:to-cyan-500 text-black font-bold py-4 px-8 rounded-full text-lg shadow-2xl hover:shadow-lime-500/25 transition-all duration-300 transform hover:scale-105"
-              >
-                🔍 Ver operação em tempo real
-              </Button>
-            </Link>
           </div>
-        </Card>
-      </div>
-    )
-  }
+
+          <p className="text-lg sm:text-xl font-semibold text-white mb-6">
+            Quer ver na prática como funciona por dentro?
+          </p>
+
+          <Link href="/estrategia-revelada">
+            <Button
+              size="lg"
+              className="w-full sm:w-auto touch-button bg-gradient-to-r from-lime-600 to-cyan-600 hover:from-lime-500 hover:to-cyan-500 text-black font-bold py-4 px-8 rounded-full text-lg shadow-2xl hover:shadow-lime-500/25 transition-all duration-300 transform hover:scale-105"
+            >
+              🔍 Ver operação em tempo real
+            </Button>
+          </Link>
+        </div>
+      </Card>
+    </div>
+  )
+}
+
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900 relative overflow-hidden flex items-center justify-center p-4">
