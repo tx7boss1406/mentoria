@@ -128,28 +128,34 @@ const isValidPhone = phoneRegex.test(cleanPhone)
       <div className="absolute top-32 sm:top-40 right-12 sm:right-20 w-2 sm:w-3 h-2 sm:h-3 bg-cyan-400 rounded-full animate-pulse opacity-60" />
       <div className="absolute bottom-24 sm:bottom-32 left-12 sm:left-20 w-2 h-2 bg-lime-400 rounded-full animate-bounce opacity-80" />
 
-      <div className="relative z-10 w-full max-w-md">
-        <Card className="bg-black/80 border-2 border-purple-500/50 backdrop-blur-sm shadow-2xl shadow-purple-500/25">
-          <div className="p-6 sm:p-8">
-            {/* Header */}
-            <div className="text-center mb-6 sm:mb-8">
-              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Rocket className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
-              </div>
+   {!showSuccess && (
+  <div className="relative z-10 w-full max-w-md">
+    <Card className="bg-black/80 border-2 border-purple-500/50 backdrop-blur-sm shadow-2xl shadow-purple-500/25">
+      <div className="p-6 sm:p-8">
 
-              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4">
-                <span className="bg-gradient-to-r from-purple-400 via-cyan-400 to-lime-400 bg-clip-text text-transparent">
-                  🚀 Preencha para garantir
-                </span>
-                <br />
-                <span className="text-white text-lg sm:text-xl md:text-2xl">sua vaga na próxima turma</span>
-              </h1>
+        {/* Header */}
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Rocket className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
+          </div>
 
-              <p className="text-gray-300 text-sm">Últimos acessos sendo liberados</p>
-            </div>
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4">
+            <span className="bg-gradient-to-r from-purple-400 via-cyan-400 to-lime-400 bg-clip-text text-transparent">
+              🚀 Preencha para garantir
+            </span>
+            <br />
+            <span className="text-white text-lg sm:text-xl md:text-2xl">
+              sua vaga na próxima turma
+            </span>
+          </h1>
 
-            {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
+          <p className="text-gray-300 text-sm">
+            Últimos acessos sendo liberados
+          </p>
+        </div>
+
+        {/* FORM */}
+        <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="nome" className="text-white flex items-center text-sm sm:text-base font-medium">
                   <User className="h-4 w-4 mr-3 text-purple-400 flex-shrink-0" />
@@ -291,14 +297,11 @@ const isValidPhone = phoneRegex.test(cleanPhone)
           </div>
         </Card>
       </div>
+   )}
 
-      {/* Success Modal - Mobile & Desktop optimized */}
-<Dialog
-  open={showSuccess}
-  onOpenChange={setShowSuccess}
-  className="flex items-center justify-center min-h-screen"
->
-  <DialogContent className="bg-black border-2 border-lime-500 max-w-sm sm:max-w-md w-full sm:w-auto mx-auto p-6 sm:p-8 rounded-lg">
+     {/* Success Modal - Mobile & Desktop optimized */}
+<Dialog open={showSuccess} onOpenChange={setShowSuccess}>
+  <DialogContent className="bg-black border-2 border-lime-500 max-w-sm sm:max-w-md w-full mx-auto p-6 sm:p-8 rounded-lg">
     <DialogHeader>
       <DialogTitle className="text-center text-lg sm:text-2xl font-bold text-white mb-4">
         🎉 Vaga Garantida!

@@ -33,6 +33,10 @@ export default function GamePage() {
   const [canvasSize, setCanvasSize] = useState({ width: 400, height: 500 })
   const [showCountdown, setShowCountdown] = useState(false)
   const [countdown, setCountdown] = useState(3)
+  const [waitingFirstTap, setWaitingFirstTap] = useState(false)
+  const [hasGameStarted, setHasGameStarted] = useState(false)
+
+
 
   const GRAVITY = 0.5
   const JUMP_FORCE = -8
@@ -212,29 +216,44 @@ export default function GamePage() {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.code === "Space") {
         e.preventDefault()
-        if (!gameState.isPlaying) {
-          initGame()
-        } else {
-          jump()
-        }
+       if (waitingFirstTap) {
+  setWaitingFirstTap(false)
+  setGameState((prev) => ({ ...prev, isPlaying: true }))
+  return
+}
+
+if (gameState.isPlaying) {
+  jump()
+}
+
       }
     }
 
     const handleClick = () => {
-      if (!gameState.isPlaying) {
-        initGame()
-      } else {
-        jump()
-      }
+      if (waitingFirstTap) {
+  setWaitingFirstTap(false)
+  setGameState((prev) => ({ ...prev, isPlaying: true }))
+  return
+}
+
+if (gameState.isPlaying) {
+  jump()
+}
+
     }
 
     const handleTouch = (e: TouchEvent) => {
       e.preventDefault()
-      if (!gameState.isPlaying) {
-        initGame()
-      } else {
-        jump()
-      }
+     if (waitingFirstTap) {
+  setWaitingFirstTap(false)
+  setGameState((prev) => ({ ...prev, isPlaying: true }))
+  return
+}
+
+if (gameState.isPlaying) {
+  jump()
+}
+
     }
 
     window.addEventListener("keydown", handleKeyPress)
@@ -251,95 +270,145 @@ export default function GamePage() {
         canvas.removeEventListener("touchstart", handleTouch)
       }
     }
-  }, [gameState.isPlaying, jump, initGame])
+}, [gameState.isPlaying, waitingFirstTap, jump])
 
-  useEffect(() => {
-    const animate = () => {
-      gameLoop()
-      draw()
-      animationRef.current = requestAnimationFrame(animate)
-    }
-
+ useEffect(() => {
+  const animate = () => {
     if (gameState.isPlaying) {
-      animationRef.current = requestAnimationFrame(animate)
+      gameLoop()
     }
+    draw()
+    animationRef.current = requestAnimationFrame(animate)
+  }
 
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current)
-      }
-    }
-  }, [gameLoop, draw, gameState.isPlaying])
+  animationRef.current = requestAnimationFrame(animate)
 
-  useEffect(() => {
-    if (showCountdown && countdown > 0) {
-      const timer = setTimeout(() => {
-        setCountdown((prev) => prev - 1)
-      }, 1000)
-      return () => clearTimeout(timer)
-    } else if (showCountdown && countdown === 0) {
-      // Pequeno delay para mostrar "GO!" antes de iniciar
-      const timer = setTimeout(() => {
-        setShowCountdown(false)
-        setCountdown(3)
-        initGame()
-      }, 500)
-      return () => clearTimeout(timer)
+  return () => {
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current)
     }
-  }, [showCountdown, countdown, initGame])
+  }
+}, [gameLoop, draw, gameState.isPlaying])
+
+
+ useEffect(() => {
+  if (!showCountdown) return
+
+  if (countdown > 0) {
+    const timer = setTimeout(() => {
+      setCountdown((prev) => prev - 1)
+    }, 1000)
+
+    return () => clearTimeout(timer)
+  }
+
+  // Quando chegar no 0
+  if (countdown === 0) {
+    const timer = setTimeout(() => {
+      setShowCountdown(false)
+      setCountdown(3)
+
+      // prepara o jogo, MAS NÃO COMEÇA
+      setGameState((prev) => ({
+        ...prev,
+        isPlaying: false,
+        gameOver: false,
+        birdY: canvasSize.height / 2,
+        birdVelocity: 0,
+        pipes: [{ x: canvasSize.width, height: 200, passed: false }],
+        score: 0,
+        money: 0,
+      }))
+
+      setWaitingFirstTap(true)
+    }, 500)
+
+    return () => clearTimeout(timer)
+  }
+}, [showCountdown, countdown, canvasSize])
 
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 via-black to-cyan-900/20" />
 
-      {/* Score Display - Mobile optimized */}
-      <div className="fixed top-2 sm:top-4 left-1/2 transform -translate-x-1/2 z-20 w-full max-w-xs sm:max-w-sm px-4">
-        <Card className="bg-black/80 border-purple-500/50 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3">
-          <div className="text-center">
-            <div className="text-lg sm:text-2xl font-bold text-lime-400 mb-1">
-              💰 SALDO: R${gameState.money.toFixed(2)}
-            </div>
-            <div className="text-xs sm:text-sm text-cyan-400">Obstáculos: {gameState.score}</div>
+     {!showGameOverModal && (
+  <>
+    {/* Score Display - Mobile optimized */}
+    <div className="fixed top-2 sm:top-4 left-1/2 transform -translate-x-1/2 z-20 w-full max-w-xs sm:max-w-sm px-4">
+      <Card className="bg-black/80 border-purple-500/50 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3">
+        <div className="text-center">
+          <div className="text-lg sm:text-2xl font-bold text-lime-400 mb-1">
+            💰 SALDO: R${gameState.money.toFixed(2)}
           </div>
-        </Card>
-      </div>
-
-      {/* Game Canvas - Mobile responsive */}
-      <div className="flex items-center justify-center min-h-screen p-4 pt-20 pb-24">
-        <div className="relative">
-          <canvas
-            ref={canvasRef}
-            width={canvasSize.width}
-            height={canvasSize.height}
-            className="border-2 border-purple-500/50 rounded-lg shadow-2xl shadow-purple-500/25 cursor-pointer touch-none"
-          />
-
-          {!gameState.isPlaying && !gameState.gameOver && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-lg">
-              <div className="text-center px-4">
-                <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">TX7 MONEY GAME</h2>
-                <p className="text-gray-300 mb-6 text-sm sm:text-base">Toque ou pressione ESPAÇO para voar</p>
-                <Button
-                  onClick={initGame}
-                  className="touch-button bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white font-bold py-3 px-6 rounded-full text-sm sm:text-base"
-                >
-                  🎮 COMEÇAR
-                </Button>
-              </div>
-            </div>
-          )}
+          <div className="text-xs sm:text-sm text-cyan-400">
+            Obstáculos: {gameState.score}
+          </div>
         </div>
-      </div>
+      </Card>
+    </div>
 
-      {/* Instructions - Mobile optimized */}
-      <div className="fixed bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 z-20 w-full max-w-xs sm:max-w-md px-4">
-        <Card className="bg-black/80 border-cyan-500/30 backdrop-blur-sm px-3 sm:px-4 py-2">
-          <p className="text-cyan-400 text-xs sm:text-sm text-center">
-            {gameState.isPlaying ? "Toque ou ESPAÇO para voar • +R$12,00 por obstáculo" : "Toque para começar"}
-          </p>
-        </Card>
+    {/* Game Canvas - Mobile responsive */}
+    <div className="flex items-center justify-center min-h-screen p-4 pt-20 pb-24">
+     <div className="relative">
+  <canvas
+    ref={canvasRef}
+    width={canvasSize.width}
+    height={canvasSize.height}
+    className="border-2 border-purple-500/50 rounded-lg shadow-2xl shadow-purple-500/25 cursor-pointer touch-none"
+  />
+
+  {/* COUNTDOWN OVERLAY */}
+  {showCountdown && (
+    <div className="absolute inset-0 flex items-center justify-center bg-black/70 rounded-lg z-30">
+      <div className="text-6xl font-extrabold text-lime-400 animate-pulse">
+        {countdown === 0 ? "GO!" : countdown}
       </div>
+    </div>
+  )}
+
+  {/* START SCREEN */}
+{!hasGameStarted && !showCountdown && (
+    <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-lg z-20">
+      <div className="text-center px-4">
+        <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
+          TX7 MONEY GAME
+        </h2>
+        <p className="text-gray-300 mb-6 text-sm sm:text-base">
+          Toque ou pressione ESPAÇO para voar
+        </p>
+        <Button
+  onClick={() => {
+    setHasGameStarted(true)
+    setShowCountdown(true)
+  }}
+  className="touch-button bg-gradient-to-r from-purple-600 to-cyan-600 text-white font-bold py-3 px-6 rounded-full"
+>
+  🎮 COMEÇAR
+</Button>
+
+      </div>
+    </div>
+  )}
+</div>
+    </div>
+
+    {/* Instructions - Mobile optimized */}
+    <div className="fixed bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 z-20 w-full max-w-xs sm:max-w-md px-4">
+      <Card className="bg-black/80 border-cyan-500/30 backdrop-blur-sm px-3 sm:px-4 py-2">
+        <p className="text-cyan-400 text-xs sm:text-sm text-center">
+        {waitingFirstTap
+  ? "Toque para começar a voar"
+  : gameState.isPlaying
+  ? "Toque ou ESPAÇO para voar • +R$12,00 por obstáculo"
+  : "Toque para começar"}
+
+
+        </p>
+      </Card>
+    </div>
+  </>
+)}
 
      {/* Game Over Modal - Mobile optimized */}
 <Dialog open={showGameOverModal} onOpenChange={setShowGameOverModal}>
