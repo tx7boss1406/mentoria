@@ -475,7 +475,7 @@ const isValidPhone = phoneRegex.test(cleanPhone)
 
         {/* CTA BUTTON */}
 <a 
-  href="https://pay.kirvano.com/f61bb896-e3bd-483a-a59a-359c5ba74aad" 
+  href="https://pay.kirvano.com/3aa7a3d7-6b73-495e-b5f8-bbf9dab2b5af" 
   target="_blank" 
   rel="noopener noreferrer"
 >
