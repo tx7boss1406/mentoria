@@ -41,7 +41,7 @@ export default function EstrategiaReveladaPage() {
         <p className="text-gray-400 max-w-2xl mx-auto mt-6 text-lg">
           Você viu na prática como um funil gamificado captura atenção.
           Agora veja como essa mesma estrutura transforma cliques soltos em
-          leads qualificados — e vendas consistentes.
+          leads qualificados e vendas consistentes.
         </p>
       </header>
 
@@ -49,38 +49,40 @@ export default function EstrategiaReveladaPage() {
       <section className="space-y-10 max-w-3xl mx-auto px-4 animate-fadeSlideUp">
 
         {[
+        {
+  number: "1",
+  title: "Captura de Atenção",
+  icon: <Target className="text-blue-400" />,
+  desc:
+    "Enquanto todos disputam cliques com páginas iguais, você cria uma experiência interativa.\nO jogo quebra o padrão, gera envolvimento imediato e coloca o lead dentro do processo, conduzindo o avanço pela página de forma natural.\n\nPáginas comuns tentam convencer.\nO jogo é envolver, conduzir e preparar o lead para avançar.",
+  insight: "Retenção 8x–12x maior comparado a páginas comuns."
+},
           {
-            number: "1",
-            title: "Captura de Atenção",
-            icon: <Target className="text-blue-400" />,
-            desc:
-              "Você para de disputar cliques e começa a entregar experiência. O jogo interrompe o scroll e transforma um visitante passivo em participante ativo.",
-            insight: "Retenção 8x–12x maior comparado a páginas comuns."
-          },
+  number: "2",
+  title: "Engajamento Ativo",
+  icon: <Sparkles className="text-green-400" />,
+  desc:
+    "O lead não apenas consome a página, ele participa.\nA interação contínua e as micro-recompensas criam progressão e aumentam o valor percebido ao longo da experiência.",
+  insight: "Leads mais aquecidos e muito mais fáceis de converter."
+},
           {
-            number: "2",
-            title: "Engajamento Ativo",
-            icon: <Sparkles className="text-green-400" />,
-            desc:
-              "O visitante deixa de consumir e começa a interagir. Micro-recompensas criam vínculo emocional e aumentam o valor percebido.",
-            insight: "Leads mais aquecidos e muito mais fáceis de converter."
-          },
-          {
-            number: "3",
-            title: "Qualificação Natural",
-            icon: <Zap className="text-yellow-400" />,
-            desc:
-              "As respostas do jogo filtram quem realmente está pronto para avançar. A qualificação acontece sem esforço, sem formulário chato.",
-            insight: "Você descarta curiosos e mantém pessoas com real intenção."
-          },
-          {
-            number: "4",
-            title: "Abertura da Oportunidade",
-            icon: <Eye className="text-purple-400" />,
-            desc:
-              "Depois da interação, o lead está emocionalmente mais receptivo. Aqui é onde a apresentação da estratégia vira desejo.",
-            insight: "Conversões muito acima da média — sem parecer pitch."
-          }
+  number: "3",
+  title: "Qualificação Natural",
+  icon: <Zap className="text-yellow-400" />,
+  desc:
+    "Cada etapa prepara a próxima.\nO lead segue avançando porque faz sentido continuar, não porque foi convencido.",
+  insight: "A venda acontece como continuação do processo."
+
+},
+
+         {
+  number: "4",
+  title: "Abertura da Oportunidade",
+  icon: <Eye className="text-purple-400" />,
+  desc:
+    "O lead entende o valor antes de ver a oferta.\nQuando a oportunidade aparece, ela já faz sentido.",
+ insight: "Conversões acima da média, sem parecer venda."
+}
         ].map((step, i) => (
           <Card
             key={i}
@@ -172,22 +174,22 @@ export default function EstrategiaReveladaPage() {
   </p>
 </section>
 
-          {/* Action Buttons */}
-<div className="flex flex-col items-center justify-center gap-4 w-full max-w-md mx-auto">
+         {/* Action Buttons */}
+<div className="flex flex-col items-center justify-center gap-5 w-full max-w-md mx-auto -mt-6">
   <Link href="/discord">
     <button
       className="
         flex items-center justify-center
-        px-4 py-2
+        px-6 py-3
         rounded-full
         bg-gradient-to-r from-cyan-500 to-lime-500
-        text-black font-bold text-sm
-        shadow-sm hover:shadow-lg
+        text-black font-bold text-base
+        shadow-md hover:shadow-xl
         hover:scale-105
         transition-all duration-300
       "
     >
-      <Eye className="mr-2 h-4 w-4" />
+      <Eye className="mr-2 h-5 w-5" />
       Ver a Operação em Tempo Real
     </button>
   </Link>
@@ -196,21 +198,21 @@ export default function EstrategiaReveladaPage() {
     <button
       className="
         flex items-center justify-center
-        px-4 py-2
+        px-6 py-3
         rounded-full
         border-2 border-purple-400
-        text-purple-300 font-bold text-sm
-        shadow-sm hover:shadow-lg
+        text-purple-300 font-bold text-base
+        shadow-md hover:shadow-lg
         hover:bg-purple-400/10
         hover:scale-105
         transition-all duration-300
       "
     >
-      <Gamepad className="mr-2 h-4 w-4" />
+      <Gamepad className="mr-2 h-5 w-5" />
       Jogar Novamente
     </button>
   </Link>
-          </div>
+</div>
         </div>
   )
 }

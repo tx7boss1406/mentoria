@@ -45,6 +45,36 @@ export default function GamePage() {
   const PIPE_SPEED = 2
   const MONEY_PER_PIPE = 12
 
+  // ================= VISUAL STATE (FORA DO DRAW) =================
+
+// ☁️ Clouds (parallax layers)
+const clouds = [
+  { x: 40, y: 50, scale: 0.9, opacity: 0.35, speed: 0.03 },
+  { x: 160, y: 35, scale: 1.1, opacity: 0.3, speed: 0.025 },
+  { x: 280, y: 70, scale: 0.8, opacity: 0.35, speed: 0.028 },
+
+  { x: 90, y: 120, scale: 1.4, opacity: 0.6, speed: 0.06 },
+  { x: 240, y: 150, scale: 1.6, opacity: 0.55, speed: 0.055 }
+]
+
+// ✨ Stars (night)
+const stars = Array.from({ length: 40 }, () => ({
+  x: Math.random() * canvasSize.width,
+  y: Math.random() * 200,
+  size: Math.random() * 1.5 + 0.5,
+  opacity: Math.random()
+}))
+
+// 🌬️ Floating particles (ambient)
+const particles = Array.from({ length: 20 }, () => ({
+  x: Math.random() * canvasSize.width,
+  y: Math.random() * canvasSize.height,
+  speed: Math.random() * 0.15 + 0.05,
+  size: Math.random() * 2 + 1,
+  opacity: Math.random() * 0.2 + 0.05
+}))
+
+
   // Adjust canvas size for mobile
   useEffect(() => {
     const updateCanvasSize = () => {
@@ -147,67 +177,204 @@ export default function GamePage() {
     const ctx = canvas.getContext("2d")
     if (!ctx) return
 
-    // Clear canvas with cyberpunk background
-    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height)
-    gradient.addColorStop(0, "#1a0033")
-    gradient.addColorStop(0.5, "#000000")
-    gradient.addColorStop(1, "#001a33")
-    ctx.fillStyle = gradient
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
+   // ================= BACKGROUND (PREMIUM REALISTA) =================
 
-    // Draw grid pattern
-    ctx.strokeStyle = "#8f00ff20"
-    ctx.lineWidth = 1
-    const gridSize = window.innerWidth < 640 ? 15 : 20
-    for (let i = 0; i < canvas.width; i += gridSize) {
-      ctx.beginPath()
-      ctx.moveTo(i, 0)
-      ctx.lineTo(i, canvas.height)
-      ctx.stroke()
-    }
-    for (let i = 0; i < canvas.height; i += gridSize) {
-      ctx.beginPath()
-      ctx.moveTo(0, i)
-      ctx.lineTo(canvas.width, i)
-      ctx.stroke()
-    }
+// 🎯 Progress (0 → 1)
+const progress = Math.min(gameState.score / 20, 1)
 
-    // Draw pipes with neon effect
-    gameState.pipes.forEach((pipe) => {
-      // Top pipe
-      ctx.fillStyle = "#00faff"
-      ctx.shadowColor = "#00faff"
-      ctx.shadowBlur = 10
-      ctx.fillRect(pipe.x, 0, PIPE_WIDTH, pipe.height)
+// 🌈 Sky (deep, cinematic: day → sunset → night)
+const skyGradient = ctx.createLinearGradient(0, 0, 0, canvas.height)
+skyGradient.addColorStop(
+  0,
+  `rgb(${185 - progress * 120}, ${225 - progress * 140}, ${255 - progress * 190})`
+)
+skyGradient.addColorStop(
+  0.55,
+  `rgb(${120 - progress * 70}, ${200 - progress * 160}, ${245 - progress * 220})`
+)
+skyGradient.addColorStop(
+  1,
+  `rgb(${30 + progress * 10}, ${60 + progress * 25}, ${120 + progress * 45})`
+)
 
-      // Bottom pipe
-      ctx.fillRect(pipe.x, pipe.height + PIPE_GAP, PIPE_WIDTH, canvas.height - pipe.height - PIPE_GAP)
+ctx.globalAlpha = 1
+ctx.shadowBlur = 0
+ctx.fillStyle = skyGradient
+ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-      // Pipe borders
-      ctx.strokeStyle = "#aaff00"
-      ctx.lineWidth = 2
-      ctx.strokeRect(pipe.x, 0, PIPE_WIDTH, pipe.height)
-      ctx.strokeRect(pipe.x, pipe.height + PIPE_GAP, PIPE_WIDTH, canvas.height - pipe.height - PIPE_GAP)
-    })
+// 🌫️ Atmospheric depth
+ctx.fillStyle = `rgba(255,255,255,${0.08 - progress * 0.05})`
+ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-    // Draw bird (TX7 themed)
-    ctx.shadowColor = "#8f00ff"
-    ctx.shadowBlur = 15
-    ctx.fillStyle = "#8f00ff"
-    ctx.beginPath()
-    ctx.arc(50, gameState.birdY, 15, 0, Math.PI * 2)
-    ctx.fill()
+// ☀️🌙 Celestial body (fixed)
+const cx = canvas.width - 80
+const cy = 80
+const radius = 36
 
-    // Bird glow effect
-    ctx.strokeStyle = "#aaff00"
-    ctx.lineWidth = 3
-    ctx.stroke()
+// ☀️ Sun (real glow, no movement)
+if (progress < 0.65) {
+  ctx.globalAlpha = 1 - progress * 1.2
 
-    // TX7 text on bird
+  const sunGlow = ctx.createRadialGradient(cx, cy, 8, cx, cy, 90)
+  sunGlow.addColorStop(0, "rgba(255,255,255,0.95)")
+  sunGlow.addColorStop(0.4, "rgba(253,224,71,0.7)")
+  sunGlow.addColorStop(1, "rgba(253,224,71,0)")
+
+  ctx.fillStyle = sunGlow
+  ctx.beginPath()
+  ctx.arc(cx, cy, 90, 0, Math.PI * 2)
+  ctx.fill()
+
+  const sunCore = ctx.createRadialGradient(cx, cy, 6, cx, cy, radius)
+  sunCore.addColorStop(0, "#ffffff")
+  sunCore.addColorStop(1, "#fde047")
+
+  ctx.fillStyle = sunCore
+  ctx.beginPath()
+  ctx.arc(cx, cy, radius, 0, Math.PI * 2)
+  ctx.fill()
+}
+
+// 🌙 Moon (real crescent with physical shadow)
+if (progress > 0.55) {
+  ctx.globalAlpha = (progress - 0.55) * 1.6
+
+  const moonGrad = ctx.createRadialGradient(
+    cx - 6,
+    cy - 6,
+    6,
+    cx,
+    cy,
+    radius
+  )
+  moonGrad.addColorStop(0, "#f9fafb")
+  moonGrad.addColorStop(1, "#d1d5db")
+
+  ctx.fillStyle = moonGrad
+  ctx.beginPath()
+  ctx.arc(cx, cy, radius * 0.95, 0, Math.PI * 2)
+  ctx.fill()
+
+  // Shadow cut → crescent
+  ctx.globalCompositeOperation = "destination-out"
+  ctx.beginPath()
+  ctx.arc(cx + 14, cy - 2, radius, 0, Math.PI * 2)
+  ctx.fill()
+  ctx.globalCompositeOperation = "source-over"
+
+  // Moon glow
+  const moonGlow = ctx.createRadialGradient(cx, cy, 10, cx, cy, 80)
+  moonGlow.addColorStop(0, "rgba(255,255,255,0.25)")
+  moonGlow.addColorStop(1, "rgba(255,255,255,0)")
+
+  ctx.fillStyle = moonGlow
+  ctx.beginPath()
+  ctx.arc(cx, cy, 80, 0, Math.PI * 2)
+  ctx.fill()
+}
+
+ctx.globalAlpha = 1
+
+// ☁️ Clouds (soft volume + light)
+const drawCloud = (
+  x: number,
+  y: number,
+  scale: number,
+  opacity: number
+) => {
+  ctx.save()
+  ctx.globalAlpha = opacity
+
+  const cloudGrad = ctx.createRadialGradient(
+    x + 20 * scale,
+    y - 10 * scale,
+    10,
+    x + 20 * scale,
+    y,
+    50 * scale
+  )
+  cloudGrad.addColorStop(0, "#ffffff")
+  cloudGrad.addColorStop(1, "#e5e7eb")
+
+  ctx.fillStyle = cloudGrad
+
+  ctx.beginPath()
+  ctx.arc(x, y, 22 * scale, 0, Math.PI * 2)
+  ctx.arc(x + 24 * scale, y - 6 * scale, 28 * scale, 0, Math.PI * 2)
+  ctx.arc(x + 52 * scale, y, 22 * scale, 0, Math.PI * 2)
+  ctx.fill()
+
+  ctx.restore()
+}
+
+clouds.forEach((cloud) => {
+  cloud.x += cloud.speed
+  if (cloud.x > canvas.width + 120) cloud.x = -120
+  drawCloud(cloud.x, cloud.y, cloud.scale, cloud.opacity)
+})
+
+// ✨ Stars (smooth night reveal)
+if (progress > 0.6) {
+  stars.forEach((star) => {
+    ctx.globalAlpha = (progress - 0.6) * star.opacity
     ctx.fillStyle = "#ffffff"
-    ctx.font = "bold 8px Arial"
-    ctx.textAlign = "center"
-    ctx.fillText("TX7", 50, gameState.birdY + 2)
+    ctx.beginPath()
+    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2)
+    ctx.fill()
+  })
+}
+ctx.globalAlpha = 1
+
+// 🌬️ Particles (very subtle)
+ctx.fillStyle = "rgba(255,255,255,0.12)"
+particles.forEach((p) => {
+  p.y -= p.speed
+  if (p.y < -10) p.y = canvas.height + 10 
+
+  ctx.beginPath()
+  ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
+  ctx.fill()
+})
+
+
+// ================= GAME OBJECTS =================
+
+// 🟩 Pipes (SEM ALTERAR LÓGICA)
+gameState.pipes.forEach((pipe) => {
+  ctx.fillStyle = "#4ade80"
+  ctx.fillRect(pipe.x, 0, PIPE_WIDTH, pipe.height)
+  ctx.fillRect(pipe.x, pipe.height + PIPE_GAP, PIPE_WIDTH, canvas.height - pipe.height - PIPE_GAP)
+
+  ctx.fillStyle = "#22c55e"
+  ctx.fillRect(pipe.x, pipe.height - 6, PIPE_WIDTH, 6)
+  ctx.fillRect(pipe.x, pipe.height + PIPE_GAP, PIPE_WIDTH, 6)
+})
+
+// 🐤 Bird (SEM ALTERAR POSIÇÃO)
+const bx = 50
+const by = gameState.birdY
+
+ctx.fillStyle = "#facc15"
+ctx.beginPath()
+ctx.arc(bx, by, 12, 0, Math.PI * 2)
+ctx.fill()
+
+ctx.fillStyle = "#000"
+ctx.beginPath()
+ctx.arc(bx + 4, by - 2, 2, 0, Math.PI * 2)  
+ctx.fill()
+
+ctx.fillStyle = "#fb923c"
+ctx.beginPath()
+ctx.moveTo(bx + 12, by)
+ctx.lineTo(bx + 18, by - 2)
+ctx.lineTo(bx + 18, by + 2)
+ctx.fill()
+
+ctx.globalAlpha = 1
+ctx.shadowBlur = 0
+
+
 
     ctx.shadowBlur = 0
   }, [gameState])
@@ -218,7 +385,11 @@ export default function GamePage() {
         e.preventDefault()
        if (waitingFirstTap) {
   setWaitingFirstTap(false)
-  setGameState((prev) => ({ ...prev, isPlaying: true }))
+  setGameState((prev) => ({
+    ...prev,
+    isPlaying: true,
+    birdVelocity: JUMP_FORCE, // 🔥 PRIMEIRO CLIQUE JÁ PULA
+  }))
   return
 }
 
@@ -232,7 +403,16 @@ if (gameState.isPlaying) {
     const handleClick = () => {
       if (waitingFirstTap) {
   setWaitingFirstTap(false)
-  setGameState((prev) => ({ ...prev, isPlaying: true }))
+ if (waitingFirstTap) {
+  setWaitingFirstTap(false)
+  setGameState((prev) => ({
+    ...prev,
+    isPlaying: true,
+    birdVelocity: JUMP_FORCE, // 🔥 PRIMEIRO CLIQUE JÁ PULA
+  }))
+  return
+}
+ setGameState((prev) => ({ ...prev, isPlaying: true }))
   return
 }
 
@@ -246,7 +426,16 @@ if (gameState.isPlaying) {
       e.preventDefault()
      if (waitingFirstTap) {
   setWaitingFirstTap(false)
-  setGameState((prev) => ({ ...prev, isPlaying: true }))
+ if (waitingFirstTap) {
+  setWaitingFirstTap(false)
+  setGameState((prev) => ({
+    ...prev,
+    isPlaying: true,
+    birdVelocity: JUMP_FORCE, // 🔥 PRIMEIRO CLIQUE JÁ PULA
+  }))
+  return
+}
+ setGameState((prev) => ({ ...prev, isPlaying: true }))
   return
 }
 

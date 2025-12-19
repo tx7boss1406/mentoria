@@ -462,7 +462,7 @@ const isValidPhone = phoneRegex.test(cleanPhone)
         <div className="flex items-center justify-center mb-8">
           <div className="bg-red-500/20 border border-red-500/40 px-4 py-2 rounded-lg">
             <p className="text-red-400 text-xs sm:text-sm font-semibold">
-              14 pessoas acabaram de entrar...
+              Ultimas vagas esgotando!
             </p>
           </div>
         </div>
