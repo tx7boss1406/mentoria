@@ -54,7 +54,7 @@ export default function EstrategiaReveladaPage() {
   title: "Captura de Atenção",
   icon: <Target className="text-blue-400" />,
   desc:
-    "Enquanto todos disputam cliques com páginas iguais, você cria uma experiência interativa.\nO jogo quebra o padrão, gera envolvimento imediato e coloca o lead dentro do processo, conduzindo o avanço pela página de forma natural.\n\nPáginas comuns tentam convencer.\nO jogo é envolver, conduzir e preparar o lead para avançar.",
+    "Enquanto todos disputam cliques com páginas iguais, você cria uma experiência interativa.\nO jogo quebra o padrão, gera envolvimento imediato e coloca o lead dentro do processo, conduzindo o avanço pela página de forma natural.\n\nPáginas comuns tentam convencer.\nAqui, a estratégia é envolver, conduzir e preparar o lead para avançar.",
   insight: "Retenção 8x–12x maior comparado a páginas comuns."
 },
           {
@@ -62,7 +62,7 @@ export default function EstrategiaReveladaPage() {
   title: "Engajamento Ativo",
   icon: <Sparkles className="text-green-400" />,
   desc:
-    "O lead não apenas consome a página, ele participa.\nA interação contínua e as micro-recompensas criam progressão e aumentam o valor percebido ao longo da experiência.",
+    "O usuário não apenas consome a página, ele participa.\nA interação contínua e as micro-recompensas criam progressão e aumentam o valor percebido ao longo da experiência.",
   insight: "Leads mais aquecidos e muito mais fáceis de converter."
 },
           {
@@ -70,7 +70,7 @@ export default function EstrategiaReveladaPage() {
   title: "Qualificação Natural",
   icon: <Zap className="text-yellow-400" />,
   desc:
-    "Cada etapa prepara a próxima.\nO lead segue avançando porque faz sentido continuar, não porque foi convencido.",
+    "Cada etapa prepara a próxima.\nEle segue avançando porque faz sentido continuar, não porque foi convencido.",
   insight: "A venda acontece como continuação do processo."
 
 },
@@ -80,7 +80,7 @@ export default function EstrategiaReveladaPage() {
   title: "Abertura da Oportunidade",
   icon: <Eye className="text-purple-400" />,
   desc:
-    "O lead entende o valor antes de ver a oferta.\nQuando a oportunidade aparece, ela já faz sentido.",
+    "O lead entende o valor antes de ver a oferta.\nQuando a oportunidade aparece, o preço deixa de ser a objeção.",
  insight: "Conversões acima da média, sem parecer venda."
 }
         ].map((step, i) => (
