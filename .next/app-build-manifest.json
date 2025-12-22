@@ -20,11 +20,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/quiz/page.js"
-    ],
-    "/estrategia-revelada/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/estrategia-revelada/page.js"
     ]
   }
 }

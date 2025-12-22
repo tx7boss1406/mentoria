@@ -30,6 +30,7 @@ export default function GamePage() {
     pipes: [],
   })
   const [showGameOverModal, setShowGameOverModal] = useState(false)
+  const [showGameOverScreen, setShowGameOverScreen] = useState(false)
   const [canvasSize, setCanvasSize] = useState({ width: 400, height: 500 })
   const [showCountdown, setShowCountdown] = useState(false)
   const [countdown, setCountdown] = useState(3)
@@ -121,12 +122,21 @@ const particles = Array.from({ length: 20 }, () => ({
       newState.birdVelocity += GRAVITY
       newState.birdY += newState.birdVelocity
 
-      // Check ground/ceiling collision
-      if (newState.birdY > canvasSize.height - 50 || newState.birdY < 0) {
-        newState.gameOver = true
-        setShowGameOverModal(true)
-        return newState
-      }
+     // Check ground/ceiling collision
+if (newState.birdY > canvasSize.height - 50 || newState.birdY < 0) {
+  newState.gameOver = true
+  newState.isPlaying = false
+
+  setShowGameOverScreen(true)
+
+  setTimeout(() => {
+    setShowGameOverScreen(false)
+    setShowGameOverModal(true)
+  }, 1500)
+
+  return newState
+}
+
 
       // Update pipes
       newState.pipes = newState.pipes.map((pipe) => ({
@@ -156,14 +166,22 @@ const particles = Array.from({ length: 20 }, () => ({
         }
 
         // Check collision
-        if (
-          50 > pipe.x &&
-          50 < pipe.x + PIPE_WIDTH &&
-          (newState.birdY < pipe.height || newState.birdY > pipe.height + PIPE_GAP)
-        ) {
-          newState.gameOver = true
-          setShowGameOverModal(true)
-        }
+       if (
+  50 > pipe.x &&
+  50 < pipe.x + PIPE_WIDTH &&
+  (newState.birdY < pipe.height || newState.birdY > pipe.height + PIPE_GAP)
+) {
+  newState.gameOver = true
+  newState.isPlaying = false
+
+  setShowGameOverScreen(true)
+
+  setTimeout(() => {
+    setShowGameOverScreen(false)
+    setShowGameOverModal(true)
+  }, 1500)
+}
+
       })
 
       return newState
@@ -350,26 +368,81 @@ gameState.pipes.forEach((pipe) => {
   ctx.fillRect(pipe.x, pipe.height + PIPE_GAP, PIPE_WIDTH, 6)
 })
 
-// 🐤 Bird (SEM ALTERAR POSIÇÃO)
+// 🐦 Bird ULTRA REAL — volume, vida e movimento orgânico
 const bx = 50
 const by = gameState.birdY
 
-ctx.fillStyle = "#facc15"
+// inclinação baseada na física
+const tilt = Math.max(-0.5, Math.min(0.7, gameState.birdVelocity / 9))
+
+ctx.save()
+ctx.translate(bx, by)
+ctx.rotate(tilt)
+
+// ================== SOMBRA (profundidade)
+ctx.fillStyle = "rgba(0,0,0,0.25)"
 ctx.beginPath()
-ctx.arc(bx, by, 12, 0, Math.PI * 2)
+ctx.ellipse(2, 4, 15, 10, 0, 0, Math.PI * 2)
 ctx.fill()
 
-ctx.fillStyle = "#000"
+// ================== CORPO (3D)
+const bodyGradient = ctx.createRadialGradient(-4, -6, 4, 0, 0, 18)
+bodyGradient.addColorStop(0, "#fff9db")
+bodyGradient.addColorStop(0.6, "#fde047")
+bodyGradient.addColorStop(1, "#eab308")
+
+ctx.fillStyle = bodyGradient
 ctx.beginPath()
-ctx.arc(bx + 4, by - 2, 2, 0, Math.PI * 2)  
+ctx.ellipse(0, 0, 16, 12, 0, 0, Math.PI * 2)
 ctx.fill()
 
-ctx.fillStyle = "#fb923c"
+// ================== BARRIGA (volume)
+ctx.fillStyle = "rgba(255,255,255,0.35)"
 ctx.beginPath()
-ctx.moveTo(bx + 12, by)
-ctx.lineTo(bx + 18, by - 2)
-ctx.lineTo(bx + 18, by + 2)
+ctx.ellipse(-2, 4, 10, 6, 0, 0, Math.PI * 2)
 ctx.fill()
+
+// ================== ASA (movimento orgânico)
+const wingFlap = Math.sin(Date.now() / 110) * 6
+ctx.fillStyle = "rgba(255,255,255,0.9)"
+ctx.beginPath()
+ctx.ellipse(-6, wingFlap, 12, 6, 0.3, 0, Math.PI * 2)
+ctx.fill()
+
+// ================== OLHO (com brilho)
+ctx.fillStyle = "#111"
+ctx.beginPath()
+ctx.arc(6, -2, 2.2, 0, Math.PI * 2)
+ctx.fill()
+
+ctx.fillStyle = "#fff"
+ctx.beginPath()
+ctx.arc(6.7, -2.7, 0.7, 0, Math.PI * 2)
+ctx.fill()
+
+// ================== BICO (mais real)
+const beakGradient = ctx.createLinearGradient(10, 0, 18, 0)
+beakGradient.addColorStop(0, "#fb923c")
+beakGradient.addColorStop(1, "#f97316")
+
+ctx.fillStyle = beakGradient
+ctx.beginPath()
+ctx.moveTo(10, 0)
+ctx.lineTo(18, -3)
+ctx.lineTo(18, 3)
+ctx.closePath()
+ctx.fill()
+
+// ================== BRILHO FINAL (polish)
+ctx.strokeStyle = "rgba(255,255,255,0.25)"
+ctx.lineWidth = 1
+ctx.beginPath()
+ctx.ellipse(0, 0, 17, 13, 0, 0, Math.PI * 2)
+ctx.stroke()
+
+ctx.restore()
+
+
 
 ctx.globalAlpha = 1
 ctx.shadowBlur = 0
@@ -428,7 +501,7 @@ if (gameState.isPlaying) {
   setWaitingFirstTap(false)
  if (waitingFirstTap) {
   setWaitingFirstTap(false)
-  setGameState((prev) => ({
+  setGameState((prev) => ({ 
     ...prev,
     isPlaying: true,
     birdVelocity: JUMP_FORCE, // 🔥 PRIMEIRO CLIQUE JÁ PULA
@@ -556,29 +629,42 @@ if (gameState.isPlaying) {
     </div>
   )}
 
-  {/* START SCREEN */}
+ {/* START SCREEN */}
 {!hasGameStarted && !showCountdown && (
-    <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-lg z-20">
-      <div className="text-center px-4">
-        <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
-          TX7 MONEY GAME
-        </h2>
-        <p className="text-gray-300 mb-6 text-sm sm:text-base">
-          Toque ou pressione ESPAÇO para voar
-        </p>
-        <Button
-  onClick={() => {
-    setHasGameStarted(true)
-    setShowCountdown(true)
-  }}
-  className="touch-button bg-gradient-to-r from-purple-600 to-cyan-600 text-white font-bold py-3 px-6 rounded-full"
->
-  🎮 COMEÇAR
-</Button>
+  <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-lg z-20">
+    <div className="text-center px-4">
+      <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
+        TX7 MONEY GAME
+      </h2>
+      <p className="text-gray-300 mb-6 text-sm sm:text-base">
+        Toque ou pressione ESPAÇO para voar
+      </p>
+      <Button
+        onClick={() => {
+          setHasGameStarted(true)
+          setShowCountdown(true)
+        }}
+        className="touch-button bg-gradient-to-r from-purple-600 to-cyan-600 text-white font-bold py-3 px-6 rounded-full"
+      >
+        🎮 COMEÇAR
+      </Button>
+    </div>
+  </div>
+)}
 
+{/* GAME OVER SCREEN (buffer anti-clique) */}
+{showGameOverScreen && (
+  <div className="absolute inset-0 z-40 flex items-center justify-center bg-black/80 backdrop-blur-sm rounded-lg pointer-events-auto">
+    <div className="text-center animate-scale-in">
+      <div className="text-5xl sm:text-6xl font-extrabold text-red-500 mb-4">
+        GAME OVER
+      </div>
+      <div className="text-sm sm:text-base text-gray-300 tracking-wide">
+        A experiência já começou…🏆
       </div>
     </div>
-  )}
+  </div>
+)}
 </div>
     </div>
 
