@@ -131,47 +131,35 @@ export default function QuizPage() {
           </div>
 
           <h1 className="text-2xl sm:text-3xl font-bold text-white mb-6">
-            🎯 Seu perfil mostra uma coisa: você não está aqui por acaso.
+           🎯 Suas respostas revelam algo importante: você não está aqui por acaso.
           </h1>
 
           <p className="text-base sm:text-lg text-gray-300 mb-6 leading-relaxed">
-            Pelo que você respondeu, dá pra ver que você realmente quer evoluir.  
-            Não é curiosidade, não é “tentativa”.  
-            É decisão — e isso já te coloca na frente de 95% das pessoas que dizem querer viver do digital.
+            Pelo que você respondeu, fica claro que você quer evoluir.
+            Não é "curiosidade". Não é "tentativa".
+            Você já decidiu avançar, e isso te coloca à frente de 95% das pessoas que dizem querer viver do digital.
           </p>
 
-          <div className="bg-gradient-to-r from-purple-900/50 to-cyan-900/50 p-6 rounded-lg border border-purple-500/30 mb-8">
-            <h3 className="text-lg sm:text-xl font-bold text-white mb-4">
-              Aqui está o que você vai ter acesso quando entrar com a gente:
-            </h3>
+          <div className="bg-gradient-to-r from-purple-900/40 to-cyan-900/40 p-5 rounded-lg border border-purple-500/30 mb-8 text-center">
+  <p className="text-white text-base sm:text-lg font-bold leading-snug">
+    O próximo passo
+    <br />
+    não foi feito para explicar.
+  </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
-              <div className="flex items-center space-x-2">
-                <span className="text-lime-400">⚡</span>
-                <span className="text-gray-300 text-sm sm:text-base">
-                  Estratégias validadas no campo de batalha — nada de teoria reciclada
-                </span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <span className="text-cyan-400">⚡</span>
-                <span className="text-gray-300 text-sm sm:text-base">
-                  Suporte real com quem já opera no digital todos os dias
-                </span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <span className="text-purple-400">⚡</span>
-                <span className="text-gray-300 text-sm sm:text-base">
-                  IA aplicada pra te dar velocidade, clareza e operação enxuta
-                </span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <span className="text-orange-400">⚡</span>
-                <span className="text-gray-300 text-sm sm:text-base">
-                  Modelos prontos para você copiar, colar e acelerar o processo
-                </span>
-              </div>
-            </div>
-          </div>
+  <p className="text-gray-300 text-sm sm:text-base mt-3 leading-snug">
+    Foi feito para você enxergar
+    <br />
+    o que normalmente fica escondido.
+  </p>
+
+  <p className="text-lime-400 text-sm sm:text-base mt-3 font-semibold">
+    Preste atenção na estrutura.
+    <br />
+    É ela que faz tudo funcionar.
+  </p>
+</div>
+
 
           <p className="text-lg sm:text-xl font-semibold text-white mb-6">
             Quer ver na prática como funciona por dentro?
@@ -204,6 +192,16 @@ export default function QuizPage() {
 
       <Card className="bg-black/90 border-2 border-purple-500/50 backdrop-blur-sm max-w-2xl w-full">
         <div className="p-6 sm:p-8">
+          {/* Diagnóstico */}
+<div className="mb-8 text-center">
+  <span className="text-sm text-purple-400 tracking-widest uppercase">
+    Diagnóstico estratégico
+  </span>
+  <h1 className="text-xl sm:text-2xl font-semibold text-white mt-2">
+    Vamos entender onde você está agora
+  </h1>
+</div>
+
           {/* Progress */}
           <div className="mb-8">
             <div className="flex justify-between items-center mb-2">

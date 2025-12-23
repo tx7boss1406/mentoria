@@ -434,7 +434,7 @@ ctx.closePath()
 ctx.fill()
 
 // ================== BRILHO FINAL (polish)
-ctx.strokeStyle = "rgba(255,255,255,0.25)"
+ctx.strokeStyle = "rgba(255,255,255,0.25)" 
 ctx.lineWidth = 1
 ctx.beginPath()
 ctx.ellipse(0, 0, 17, 13, 0, 0, Math.PI * 2)
@@ -716,69 +716,102 @@ if (gameState.isPlaying) {
       </div>
     </div>
 
-    {/* TEXTO */}
-    <p className="text-gray-200 text-sm leading-snug mt-3 w-full px-1 text-center">
-  O que você acabou de sentir
+  {/* TEXTO */}
+<p className="text-gray-200 text-sm leading-snug mt-3 w-full px-1 text-center">
+  Você não precisou pensar muito.
   <br />
-  <span className="text-lime-400 font-bold">
-    não foi só um jogo.
-  </span>
+  Não precisou decidir nada.
   <br />
-  Foi uma prova real de como o cérebro reage quando você usa estímulos certos.
+  <br />
+  Apenas clicou...
+  <br />
+  seguiu...
+  <br />
+  e agora está aqui.
 </p>
 
+{/* CTA */}
+<div className="text-white text-base font-extrabold mt-4 w-full px-2 leading-snug text-center">
+  Antes de revelar a estratégia,
+  <br />
+  preciso saber:
+  <br />
+  em qual fase você está hoje.
+</div>
 
-    {/* CTA */}
-    <div className="text-white text-base font-extrabold mt-4 w-full px-2 leading-snug">
-      🔍 Quer descobrir os bastidores do que acabou de acontecer?
-    </div>
+
 
     {/* BUTTONS */}
-    <div className="space-y-3 mt-4 w-full">
+<div className="space-y-2 mt-4 w-full">
 
-      {/* Ver Estratégia */}
-      <Link href="/quiz">
-        <Button
-          className="
-            w-full 
-            bg-gradient-to-r from-purple-600 to-cyan-600 
-            hover:from-purple-500 hover:to-cyan-500
-            text-white font-bold py-3 rounded-full text-sm
-          "
-        >
-          🚀 Ver Estratégia
-        </Button>
-      </Link>
+  {/* Avançar para o próximo passo */}
+  <Link href="/quiz">
+    <Button
+      className="
+        w-full 
+        bg-gradient-to-r from-purple-600 to-cyan-600 
+        hover:from-purple-500 hover:to-cyan-500
+        text-white font-extrabold
+        py-3.5
+        rounded-full
+        text-base
+        shadow-lg
+        transition-all
+      "
+    >
+      🚀 Próximo passo
+    </Button>
+  </Link>
 
-      {/* Revelar Bastidores */}
-      <Link href="/quiz">
-        <Button
-          variant="outline"
-          className="
-            w-full 
-            bg-transparent 
-            border-2 border-cyan-400 
-            text-cyan-400 
-            hover:bg-cyan-400 hover:text-black 
-            font-bold py-3 rounded-full text-sm
-          "
-        >
-          📈 Revelar bastidores
-        </Button>
-      </Link>
+  {/* entender melhor */}
+  <Link href="/quiz">
+    <Button
+      variant="outline"
+      className="
+        w-full 
+        bg-transparent 
+        border-2 border-cyan-400 
+        text-cyan-300 
+        hover:bg-cyan-400 hover:text-black 
+        font-extrabold
+        py-3.5
+        rounded-full
+        text-base
+        transition-all
+      "
+    >
+      📈 entender melhor
+    </Button>
+  </Link>
 
-      {/* Jogar de novo */}
-      <Button
-        onClick={() => {
-          setShowGameOverModal(false)
-          setShowCountdown(true)
-        }}
-        variant="outline" className="w-full touch-button bg-transparent border-2 border-lime-400 text-lime-400 hover:bg-lime-400 hover:text-black font-bold py-3 px-4 sm:px-6 rounded-full text-sm sm:text-base"
+  {/* Jogar de novo */}
+  <Button
+    onClick={() => {
+      setShowGameOverModal(false)
+      setShowCountdown(true)
+    }}
+    variant="outline"
+    className="
+      w-full
+      touch-button
+      bg-transparent
+      border-2 border-lime-400
+      text-lime-400
+      hover:bg-lime-400 hover:text-black
+      font-bold
+      py-2.5
+      px-4 sm:px-6
+      rounded-full
+      text-sm
+      opacity-80
+      transition-all
+    "
+  >
+    <RotateCcw className="mr-2 h-4 w-4" /> 🔁 Jogar de novo
+  </Button>
 
-      >
-        <RotateCcw className="mr-2 h-4 w-4" /> 🔁 Jogar de novo
-      </Button>
-    </div>
+</div>
+
   </DialogContent>
 </Dialog>
 
