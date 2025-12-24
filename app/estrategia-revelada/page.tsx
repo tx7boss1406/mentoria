@@ -174,19 +174,23 @@ export default function EstrategiaReveladaPage() {
   </p>
 </section>
 
-         {/* Action Buttons */}
-<div className="flex flex-col items-center justify-center gap-5 w-full max-w-md mx-auto -mt-6">
+        {/* Action Buttons */}
+<div className="flex flex-col items-center justify-center gap-4 w-full max-w-md mx-auto -mt-2">
+  
+  {/* BOTÃO PRINCIPAL */}
   <Link href="/discord">
     <button
       className="
-        flex items-center justify-center
-        px-6 py-3
+        relative flex items-center justify-center
+        px-8 py-4
         rounded-full
-        bg-gradient-to-r from-cyan-500 to-lime-500
-        text-black font-bold text-base
-        shadow-md hover:shadow-xl
-        hover:scale-105
+        bg-gradient-to-r from-lime-400 via-emerald-400 to-orange-400
+        text-black font-bold text-base sm:text-lg
+        shadow-[0_0_0_0_rgba(0,0,0,0)]
+        hover:shadow-[0_0_25px_rgba(132,204,22,0.35)]
         transition-all duration-300
+        hover:scale-[1.03]
+        focus:outline-none
       "
     >
       <Eye className="mr-2 h-5 w-5" />
@@ -194,25 +198,28 @@ export default function EstrategiaReveladaPage() {
     </button>
   </Link>
 
+  {/* BOTÃO SECUNDÁRIO */}
   <Link href="/game">
     <button
       className="
         flex items-center justify-center
         px-6 py-3
         rounded-full
-        border-2 border-purple-400
-        text-purple-300 font-bold text-base
-        shadow-md hover:shadow-lg
-        hover:bg-purple-400/10
-        hover:scale-105
+        border border-white/20
+        text-white/70 font-medium text-sm
+        hover:text-white
+        hover:border-white/40
+        hover:bg-white/5
         transition-all duration-300
       "
     >
-      <Gamepad className="mr-2 h-5 w-5" />
-      Jogar Novamente
+      <Gamepad className="mr-2 h-4 w-4" />
+      Jogar novamente
     </button>
   </Link>
+
 </div>
+
         </div>
   )
 }

@@ -30,7 +30,7 @@ const messages: Omit<Message, "id" | "timestamp">[] = [
     user: "@tx7boss",
     role: "DONO",
     color: "text-red-400",
-    content: "A partir de agora, você opera com a gente. Aqui é execução em alta pressão, e resultado aparece rápido pra quem acompanha o ritmo.",
+    content: "A partir de agora, você opera com a gente. Aqui é execução, e resultado aparece rápido pra quem acompanha o ritmo.",
   },
   {
     user: "Lucas",
