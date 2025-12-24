@@ -50,38 +50,40 @@ export default function EstrategiaReveladaPage() {
 
         {[
         {
-  number: "1",
-  title: "Captura de Atenção",
-  icon: <Target className="text-blue-400" />,
-  desc:
-    "Enquanto todos disputam cliques com páginas iguais, você cria uma experiência interativa.\nO jogo quebra o padrão, gera envolvimento imediato e coloca o lead dentro do processo, conduzindo o avanço pela página de forma natural.\n\nPáginas comuns tentam convencer.\nAqui, a estratégia é envolver, conduzir e preparar o lead para avançar.",
-  insight: "Retenção 8x–12x maior comparado a páginas comuns."
+ number: "1",
+title: "Captura de Atenção",
+icon: <Target className="text-blue-400" />,
+desc:
+  "o jogo quebra o padrão.\nenquanto todo mundo faz landing page igual, você entrega uma experiência única que prende a atenção e envolve o lead desde o primeiro clique.",
+insight: "Resultado: tempo de permanência até 10x maior que páginas tradicionais."
+
 },
           {
   number: "2",
   title: "Engajamento Ativo",
   icon: <Sparkles className="text-green-400" />,
   desc:
-    "O usuário não apenas consome a página, ele participa.\nA interação contínua e as micro-recompensas criam progressão e aumentam o valor percebido ao longo da experiência.",
-  insight: "Leads mais aquecidos e muito mais fáceis de converter."
+    "O usuário não só lê, ele participa.\nA interação contínua e as micro-recompensas criam progressão e aumentam o valor percebido ao longo da experiência.",
+  insight: "taxa de conversão até 3x maior do que páginas estáticas."
 },
           {
   number: "3",
-  title: "Qualificação Natural",
-  icon: <Zap className="text-yellow-400" />,
-  desc:
-    "Cada etapa prepara a próxima.\nEle segue avançando porque faz sentido continuar, não porque foi convencido.",
-  insight: "A venda acontece como continuação do processo."
+title: "Revelação da Estratégia",
+icon: <Zap className="text-yellow-400" />,
+desc:
+  "No momento certo, você revela que aquilo tudo foi uma estratégia.\no usuário se sente \"descoberto\" e quer aprender mais.",
+insight: "Resultado: leads muito mais conscientes e preparados para avançar."
 
 },
 
          {
-  number: "4",
-  title: "Abertura da Oportunidade",
-  icon: <Eye className="text-purple-400" />,
-  desc:
-    "O lead entende o valor antes de ver a oferta.\nQuando a oportunidade aparece, o preço deixa de ser a objeção.",
- insight: "Conversões acima da média, sem parecer venda."
+ number: "4",
+title: "Conversão Natural",
+icon: <Eye className="text-purple-400" />,
+desc:
+  "depois da experiência, a venda acontece naturalmente.\no lead já está convencido do seu conhecimento e da sua autoridade.",
+insight: "Resultado: vendas sem objeções e clientes pré-aquecidos."
+
 }
         ].map((step, i) => (
           <Card
