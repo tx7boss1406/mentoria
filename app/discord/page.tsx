@@ -61,7 +61,7 @@ const messages: Omit<Message, "id" | "timestamp">[] = [
     user: "@tx7boss",
     role: "DONO",
     color: "text-red-400",
-    content: "Aqui você não assiste curso. Você opera junto com a gente.",
+    content: "Isso não é um curso. É uma operação real com suporte ativo.",
   },
 ]
 
